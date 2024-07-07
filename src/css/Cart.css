@@ -172,4 +172,8 @@
   .cart .total-price {
     border-bottom: 2px solid rgba(69, 43, 31, 0.5);
   }
+
+  .cart .discount button {
+    width: 40%;
+  }
 }

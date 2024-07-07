@@ -83,7 +83,7 @@ const Home = () => {
         <section className="products mt-5 ">
           <div className="mx-5 title d-flex justify-content-center align-items-center py-1">
             <h3 className="m-0 p-0">
-              HOT DEALS FOR THIS WEEK{" "}
+              HOT DEALS FOR THIS WEEK <br className="d-md-none " />
               <span className="ms-md-3 ms-0">SAVE UP TO 50% OFF</span>
             </h3>
           </div>

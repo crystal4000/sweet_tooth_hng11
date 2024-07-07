@@ -225,7 +225,7 @@ const Cart = () => {
                   CHECKOUT
                 </button>
                 <p
-                  className="mt-2 text-end text-decoration-underline"
+                  className="continue mt-2 text-end text-decoration-underline"
                   style={{ cursor: "pointer" }}
                   onClick={() => navigate("/")}
                 >

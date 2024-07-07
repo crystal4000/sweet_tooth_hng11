@@ -208,4 +208,13 @@ header .btn:focus {
   .products .products-list .card .icon svg {
     font-size: 20px;
   }
+
+  header p {
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .continue {
+    font-size: 14px;
+  }
 }
