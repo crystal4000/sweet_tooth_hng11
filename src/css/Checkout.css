@@ -89,29 +89,32 @@
   margin-top: 32px;
 }
 
-.payment .image-container {
-  height: 50px;
-  width: 70px;
-}
-
 .payment .image-container.visa {
   background: url(../images/Visa.png) no-repeat;
   background-size: contain;
+  height: 70px;
+  width: 70px;
 }
 
 .payment .image-container.mastercard {
   background: url(../images/Mastercard.png) no-repeat;
   background-size: contain;
+  height: 50px;
+  width: 70px;
 }
 
 .payment .image-container.paypal {
   background: url(../images/PayPal.png) no-repeat;
   background-size: contain;
+  height: 50px;
+  width: 80px;
 }
 
 .payment .image-container.american-express {
   background: url(../images/AmericanExpress.png) no-repeat;
   background-size: contain;
+  height: 50px;
+  width: 80px;
 }
 
 .payment .submitBtn {
