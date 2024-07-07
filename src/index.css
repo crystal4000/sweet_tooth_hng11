@@ -185,6 +185,11 @@ footer .copy-right {
   .navigation .links a {
     color: rgba(0, 0, 0, 0.5);
   }
+
+  .navigation .links .active {
+    color: rgba(0, 0, 0, 1) !important;
+    text-decoration: underline;
+  }
   .navbar-toggler {
     border: none !important;
     font-size: 20px;

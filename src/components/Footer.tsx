@@ -9,7 +9,7 @@ const Footer = () => {
       <footer className="mt-2 py-3">
         <Container>
           <div className="row">
-            <div className="footer-logo col-md-3 col-12 d-flex align-items-center">
+            <div className="footer-logo col-md-3 col-12 d-flex align-items-center mt-md-0 mt-5">
               <p>Sweet Tooth</p>
             </div>
             <div className="col-md-3 col-6 d-md-flex justify-content-center ">

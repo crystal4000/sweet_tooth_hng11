@@ -193,6 +193,19 @@ header .btn:focus {
   }
 
   .products .products-list {
-    grid-template-columns: repeat(1, minmax(min(9rem, 100%), 1fr));
+    grid-template-columns: repeat(2, minmax(min(9rem, 100%), 1fr));
+    gap: 1rem;
+  }
+
+  .products .products-list .product-details h5 {
+    font-size: 14px;
+  }
+
+  .products .products-list .card .icon {
+    width: 30px;
+    height: 30px;
+  }
+  .products .products-list .card .icon svg {
+    font-size: 20px;
   }
 }

@@ -62,7 +62,7 @@ const Home = () => {
       {/* <Toaster position="top-right" /> */}
       <header className="py-4 px-5">
         <div className="row">
-          <div className="col-md-6 col-12 d-flex flex-column justify-content-md-center align-items-start">
+          <div className="col-md-6 col-12 ms-md-0 ms-3 d-flex flex-column justify-content-md-center align-items-start">
             <h2>Treat Yourself To Something Special</h2>
             <p>Handcrafted with love, Devoured with joy</p>
             <button type="button" className="btn">
@@ -87,7 +87,7 @@ const Home = () => {
               <span className="ms-md-3 ms-0">SAVE UP TO 50% OFF</span>
             </h3>
           </div>
-          <div className="products-container mx-3 px-5 pt-3 pb-4 mb-3">
+          <div className="products-container mx-md-3 px-md-5 px-1 pt-3 pb-4 mb-3">
             <div className="products-list mt-5">
               {productsData.map((product) => (
                 <div className="card" key={product.id}>

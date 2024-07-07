@@ -137,13 +137,13 @@
     font-size: 18px;
   }
 
-  .cart .discount {
-    display: block !important;
-  }
-
-  .cart .discount button {
-    width: 100%;
-    margin-top: 10px;
+  .cart .product h5,
+  .cart .quantity,
+  .cart .amount p,
+  .cart .discount button,
+  .cart .checkoutBtn,
+  .cart .discount input::placeholder {
+    font-size: 14px;
   }
 
   .cart .discount input::placeholder {
@@ -153,7 +153,8 @@
 
 @media screen and (max-width: 576px) {
   .cart .header {
-    font-size: 12px;
+    font-size: 20px;
+    font-weight: 500;
   }
   .cart .header .add-icon,
   .cart .header .minus-icon {
@@ -162,13 +163,13 @@
   .cart .product p {
     font-size: 12px;
   }
-  .cart .product h5,
-  .cart .quantity,
-  .cart .price,
-  .cart .amount p,
-  .cart .discount button,
-  .cart .checkoutBtn,
-  .cart .discount input::placeholder {
-    font-size: 14px;
+
+  .cart .price {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .cart .total-price {
+    border-bottom: 2px solid rgba(69, 43, 31, 0.5);
   }
 }
