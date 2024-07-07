@@ -1,0 +1,213 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Jost:ital,wght@0,100..900;1,100..900&family=Joti+One&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-optical-sizing: auto;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.14px;
+}
+
+html,
+body,
+#root,
+.App {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/*Navigation - src\components\Navigation.tsx*/
+
+.navbar-toggler {
+  border: none;
+}
+
+.navigation {
+  background: rgba(69, 43, 31, 1);
+  color: white;
+}
+
+.navigation .toggle {
+  display: none;
+}
+
+.navigation .toggle-icon {
+  font-size: 25px;
+  color: rgba(0, 0, 0, 1);
+}
+
+.navigation p {
+  font-size: 13px;
+  font-weight: 700;
+  font-family: "Libre Baskerville", serif;
+  color: rgba(247, 220, 111, 1);
+}
+
+.navigation .logo {
+  font-family: "Libre Baskerville", serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 44.64px;
+  color: rgba(247, 220, 111, 1);
+}
+
+.navigation .links a {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 29.05px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.navigation .links .active {
+  color: rgba(255, 255, 255, 1) !important;
+  text-decoration: underline;
+}
+
+.navigation .nav-icon {
+  font-size: 25px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/*Navigation - End*/
+
+/*Footer - src\components\Footer.tsx*/
+
+footer {
+  background: rgba(69, 43, 31, 1);
+  color: white;
+  font-family: "Libre Baskerville", serif;
+  font-weight: 400;
+}
+
+footer .footer-logo {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 44.64px;
+  color: rgba(247, 220, 111, 1);
+}
+
+footer ul p {
+  font-size: 16px;
+  line-height: 39.68px;
+}
+
+footer ul li {
+  font-size: 14px;
+  line-height: 29.76px;
+}
+
+footer label {
+  font-size: 10px;
+}
+
+footer .input-group > .form-control,
+footer .input-group-text {
+  border: none;
+  background: rgba(247, 220, 111, 1);
+  color: rgba(69, 43, 31, 1);
+  border-radius: 0;
+  font-size: 10px;
+}
+
+footer .input-group > .form-control:focus,
+footer .input-group-text:focus {
+  box-shadow: none;
+}
+
+footer .copy-right {
+  font-family: "Jost", sans-serif;
+  font-size: 16px;
+  line-height: 32.68px;
+}
+
+/*Footer - End*/
+
+/*Media Queries*/
+
+@media screen and (max-width: 768px) {
+  .navigation .logo {
+    font-size: 25px;
+  }
+  .navigation .nav-icon {
+    font-size: 20px;
+  }
+
+  .navigation .links a {
+    font-size: 14px;
+  }
+
+  footer .footer-logo {
+    font-size: 20px;
+  }
+
+  footer ul p {
+    font-size: 14px;
+  }
+
+  footer ul li {
+    font-size: 11px;
+    line-height: 29.76px;
+  }
+  footer label {
+    font-size: 8px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  header p {
+    font-size: 14px;
+  }
+  .navigation {
+    background: rgba(245, 245, 220, 1);
+  }
+  .navigation .logo {
+    display: none;
+  }
+
+  .navigation .toggle {
+    display: flex;
+    align-items: center;
+  }
+  .navigation .nav-icon,
+  .navigation .links a {
+    color: rgba(0, 0, 0, 0.5);
+  }
+  .navbar-toggler {
+    border: none !important;
+    font-size: 20px;
+  }
+
+  .navigation .navbar-toggler:focus {
+    box-shadow: none;
+    border: none !important;
+  }
+
+  .navigation .navbar-nav {
+    text-align: center;
+  }
+
+  .nav-icons {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 10px;
+  }
+
+  footer .newsletter {
+    width: 100%;
+    margin-top: 10px !important;
+  }
+}

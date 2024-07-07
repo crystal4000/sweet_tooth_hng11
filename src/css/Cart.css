@@ -1,0 +1,174 @@
+.cart {
+  font-family: "Jost", sans-serif;
+}
+.cart h2 {
+  font-family: "Libre Baskerville", serif;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 74.4px;
+  text-align: left;
+}
+
+.cart .header-row {
+  border-bottom: 2px solid rgba(69, 43, 31, 0.5);
+}
+
+.cart .header {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 34.68px;
+  color: rgba(69, 43, 31, 1);
+}
+
+.cart .header .add-icon,
+.cart .header .minus-icon {
+  font-size: 16px;
+}
+
+.cart .image-container {
+  height: 100px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgba(69, 43, 31, 1);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.cart .image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cart .product h5,
+.cart .quantity,
+.cart .price {
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 1);
+}
+
+.cart .product p {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.cart .total {
+  margin-top: 7px;
+  font-family: "Libre Baskerville", serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 1);
+}
+
+.cart .amount p {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 1);
+}
+
+.cart .discount input {
+  border: 2px solid rgba(247, 220, 111, 1);
+  border-radius: 5px;
+  padding: 5px 10px 5px 10px;
+  font-family: "Jost", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 1);
+}
+
+.cart .discount input::placeholder {
+  font-family: "Jost", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+}
+
+.cart .discount button {
+  background: rgba(247, 220, 111, 1);
+  border-radius: 5px;
+  padding: 5px 10px 5px 10px;
+  font-family: "Jost", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 1);
+}
+
+.cart .discount button:hover {
+  background: rgba(247, 220, 111, 0.5);
+}
+
+.cart .checkoutBtn {
+  background: rgba(247, 220, 111, 1);
+  border-radius: 5px;
+  padding: 5px 10px 5px 10px;
+  font-family: "Jost", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 1);
+}
+
+@media screen and (max-width: 768px) {
+  .cart .header {
+    font-size: 14px;
+  }
+
+  .cart .header .add-icon,
+  .cart .header .minus-icon {
+    font-size: 22px !important; /* Ensure the font size is applied */
+  }
+
+  .cart .product p {
+    font-size: 14px;
+  }
+
+  .cart .product h5,
+  .cart .quantity,
+  .cart .price {
+    font-size: 16px;
+  }
+
+  .cart .total {
+    margin-top: 12px;
+    font-size: 18px;
+  }
+
+  .cart .discount {
+    display: block !important;
+  }
+
+  .cart .discount button {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .cart .discount input::placeholder {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .cart .header {
+    font-size: 12px;
+  }
+  .cart .header .add-icon,
+  .cart .header .minus-icon {
+    font-size: 22px !important; /* Ensure the font size is applied */
+  }
+  .cart .product p {
+    font-size: 12px;
+  }
+  .cart .product h5,
+  .cart .quantity,
+  .cart .price,
+  .cart .amount p,
+  .cart .discount button,
+  .cart .checkoutBtn,
+  .cart .discount input::placeholder {
+    font-size: 14px;
+  }
+}
