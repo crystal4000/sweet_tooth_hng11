@@ -99,12 +99,18 @@ footer .footer-logo {
   color: rgba(247, 220, 111, 1);
 }
 
+footer ul a {
+  color: white;
+  text-decoration: none;
+}
+
 footer ul p {
   font-size: 16px;
   line-height: 39.68px;
 }
 
-footer ul li {
+footer ul li,
+footer ul a {
   font-size: 14px;
   line-height: 29.76px;
 }

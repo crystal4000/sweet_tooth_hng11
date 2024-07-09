@@ -3,18 +3,10 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 import { CiHeart, CiSearch } from "react-icons/ci";
 import { PiShoppingCartThin } from "react-icons/pi";
 import { IoMenu } from "react-icons/io5";
-import { NavLink, useLocation } from "react-router-dom";
-
-interface CustomNavLinkProps {
-  to: string;
-  label: React.ReactNode;
-  toggle?: boolean;
-  onClick?: () => void;
-}
+import { CustomNavLink } from "./CustomNavLink";
 
 const Navigation = () => {
   const [toggle, setToggle] = useState(false);
-  const location = useLocation();
 
   return (
     <>
@@ -65,21 +57,6 @@ const Navigation = () => {
       </Navbar>
     </>
   );
-
-  function CustomNavLink({ to, label, toggle, onClick }: CustomNavLinkProps) {
-    const isActive = location.pathname === to;
-
-    return (
-      <Nav.Link
-        as={NavLink}
-        to={to}
-        className={`me-${toggle ? "4" : "2"} ${isActive ? "active" : ""}`}
-        onClick={onClick}
-      >
-        {label}
-      </Nav.Link>
-    );
-  }
 };
 
 export default Navigation;

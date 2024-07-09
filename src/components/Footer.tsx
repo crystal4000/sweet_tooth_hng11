@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Form, InputGroup } from "react-bootstrap";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import { GoMail } from "react-icons/go";
+import { NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -15,10 +16,18 @@ const Footer = () => {
             <div className="col-md-3 col-6 d-md-flex justify-content-center ">
               <ul className="m-0 p-0">
                 <p className="m-0">Category</p>
-                <li>Home</li>
-                <li>Product</li>
-                <li>Cart</li>
-                <li>Delivery</li>
+                <li>
+                  <NavLink to="#">Home </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/product">Product</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/cart">Cart</NavLink>
+                </li>
+                <li>
+                  <NavLink to="#">Delivery</NavLink>
+                </li>
               </ul>
             </div>
             <div className="col-md-3 col-6 d-flex justify-content-center ">
