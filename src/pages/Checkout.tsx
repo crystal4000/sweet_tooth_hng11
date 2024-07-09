@@ -26,7 +26,7 @@ const Checkout = () => {
           <hr /> */}
 
           <div className="col-md-6 col-12">
-            <>
+            <div className="px-md-3">
               <h5 className="mb-4">BILLING INFORMATION</h5>
               <Form.Group className="mb-4">
                 <Form.Label>First Name</Form.Label>
@@ -59,14 +59,14 @@ const Checkout = () => {
                   </Form.Group>
                 </Col>
               </Row>
-            </>
+            </div>
           </div>
           {/* <div className="col-md-5 col-12 d-flex flex-column align-items-md-center justify-content-center mt-2">
            
           </div> */}
 
           <div className="col-md-6 col-12">
-            <>
+            <div className="px-md-3">
               {" "}
               <h5 className="mb-4">CREDIT CARD INFORMATION</h5>
               <Form.Group className="mb-4">
@@ -113,7 +113,7 @@ const Checkout = () => {
                   <div className="image-container american-express"></div>
                 </div>
               </div>
-            </>
+            </div>
 
             <button type="button" className="submitBtn mt-4">
               Submit Payment
