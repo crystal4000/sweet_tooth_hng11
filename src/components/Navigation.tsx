@@ -48,7 +48,7 @@ const Navigation = () => {
               toggle={toggle}
             />
             <CustomNavLink
-              to="#cart"
+              to="/cart"
               label={<PiShoppingCartThin className="nav-icon" />}
               toggle={toggle}
             />

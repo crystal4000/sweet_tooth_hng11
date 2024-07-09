@@ -39,9 +39,8 @@
 }
 
 .payment h3 {
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 500;
-  line-height: 46.24px;
 }
 
 .payment hr {
@@ -92,29 +91,29 @@
 .payment .image-container.visa {
   background: url(../images/Visa.png) no-repeat;
   background-size: contain;
-  height: 70px;
-  width: 70px;
+  height: 45px;
+  width: 45px;
 }
 
 .payment .image-container.mastercard {
   background: url(../images/Mastercard.png) no-repeat;
   background-size: contain;
-  height: 50px;
-  width: 70px;
+  height: 30px;
+  width: 50px;
 }
 
 .payment .image-container.paypal {
   background: url(../images/PayPal.png) no-repeat;
   background-size: contain;
-  height: 50px;
-  width: 80px;
+  height: 30px;
+  width: 60px;
 }
 
 .payment .image-container.american-express {
   background: url(../images/AmericanExpress.png) no-repeat;
   background-size: contain;
-  height: 50px;
-  width: 80px;
+  height: 30px;
+  width: 60px;
 }
 
 .payment .submitBtn {

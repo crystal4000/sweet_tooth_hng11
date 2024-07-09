@@ -25,9 +25,6 @@ const Footer = () => {
                 <li>
                   <NavLink to="/cart">Cart</NavLink>
                 </li>
-                <li>
-                  <NavLink to="#">Delivery</NavLink>
-                </li>
               </ul>
             </div>
             <div className="col-md-3 col-6 d-flex justify-content-center ">
