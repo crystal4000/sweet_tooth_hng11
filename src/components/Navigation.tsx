@@ -12,7 +12,7 @@ const Navigation = () => {
     <>
       <Navbar collapseOnSelect expand="md" className="navigation">
         <Container>
-          <Navbar.Toggle
+          {/* <Navbar.Toggle
             aria-controls="responsive-navbar-nav"
             onClick={() => setToggle(!toggle)}
             className=" toggle"
@@ -21,9 +21,18 @@ const Navigation = () => {
               <IoMenu className="toggle-icon me-3" />
             </span>
             <p className="m-0 p-0">Sweet Tooth</p>
-          </Navbar.Toggle>
-
-          <Navbar.Collapse id="responsive-navbar-nav">
+          </Navbar.Toggle> */}
+          <div className="toggle">
+            {" "}
+            <span>
+              <IoMenu className="toggle-icon me-3" />
+            </span>
+            <CustomNavLink to="/" label="Sweet Tooth" toggle={toggle} />
+          </div>
+          <Navbar.Brand href="/" className="logo">
+            Sweet Tooth
+          </Navbar.Brand>
+          {/* <Navbar.Collapse id="responsive-navbar-nav">
             <Navbar.Brand href="/" className="logo">
               Sweet Tooth
             </Navbar.Brand>
@@ -35,7 +44,7 @@ const Navigation = () => {
               <CustomNavLink to="/cart" label="Cart" />
               <CustomNavLink to="/checkout" label="Checkout" />
             </Nav>
-          </Navbar.Collapse>
+          </Navbar.Collapse> */}
           <Nav className={`d-flex flex-row ${toggle ? "mx-auto" : ""}`}>
             <CustomNavLink
               to="#search"
@@ -43,7 +52,7 @@ const Navigation = () => {
               toggle={toggle}
             />
             <CustomNavLink
-              to="#favorite"
+              to="/"
               label={<CiHeart className="nav-icon" />}
               toggle={toggle}
             />

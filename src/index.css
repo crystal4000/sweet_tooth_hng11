@@ -43,6 +43,13 @@ main {
   display: none;
 }
 
+.navigation .toggle a {
+  font-size: 13px;
+  font-weight: 700;
+  font-family: "Libre Baskerville", serif;
+  color: rgba(0, 0, 0, 1);
+}
+
 .navigation .toggle-icon {
   font-size: 25px;
   color: rgba(0, 0, 0, 1);
