@@ -25,7 +25,10 @@ const Navigation = () => {
           <div className="toggle">
             {" "}
             <span>
-              <IoMenu className="toggle-icon me-3" />
+              <IoMenu
+                className="toggle-icon me-3"
+                onClick={() => setToggle(!toggle)}
+              />
             </span>
             <CustomNavLink to="/" label="Sweet Tooth" toggle={toggle} />
           </div>
