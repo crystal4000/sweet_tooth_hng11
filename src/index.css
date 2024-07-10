@@ -62,7 +62,8 @@ main {
   color: rgba(0, 0, 0, 1);
 }
 
-.navigation .logo {
+.navigation .logo,
+.navigation .logo:hover {
   font-family: "Libre Baskerville", serif;
   font-size: 36px;
   font-weight: 700;
