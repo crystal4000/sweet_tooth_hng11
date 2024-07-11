@@ -48,7 +48,8 @@ const Navigation = () => {
               <CustomNavLink to="/checkout" label="Checkout" />
             </Nav>
           </Navbar.Collapse> */}
-          <Nav className={`d-flex flex-row ${toggle ? "mx-auto" : ""}`}>
+          {/* <Nav className={`d-flex flex-row ${toggle ? "mx-auto" : ""}`}> */}
+          <Nav className={`d-flex flex-row `}>
             <CustomNavLink
               to="#search"
               label={<CiSearch className="nav-icon" />}

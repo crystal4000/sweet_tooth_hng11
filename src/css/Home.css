@@ -64,6 +64,23 @@ header .btn:focus {
   margin: 0 auto;
 }
 
+.header-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+header .line {
+  width: 134px;
+  height: 5px;
+  gap: 0px;
+  border-radius: 3px 0px 0px 0px;
+  background: rgba(51, 51, 51, 1);
+  margin: 0 auto;
+  display: none;
+}
+
 .products {
   position: relative;
 }
@@ -185,6 +202,13 @@ header .btn:focus {
 }
 
 @media screen and (max-width: 576px) {
+  header h2 {
+    color: rgba(51, 51, 51, 1);
+  }
+  header .line {
+    display: block;
+  }
+
   .products .title {
     top: -10px;
   }

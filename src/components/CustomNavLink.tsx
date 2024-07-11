@@ -18,10 +18,18 @@ export function CustomNavLink({
   const isActive = location.pathname === to;
 
   return (
+    // <Nav.Link
+    //   as={NavLink}
+    //   to={to}
+    //   className={`me-${toggle ? "4" : "2"} ${isActive ? "active" : ""}`}
+    //   onClick={onClick}
+    // >
+    //   {label}
+    // </Nav.Link>
     <Nav.Link
       as={NavLink}
       to={to}
-      className={`me-${toggle ? "4" : "2"} ${isActive ? "active" : ""}`}
+      className={`me-2 ${isActive ? "active" : ""}`}
       onClick={onClick}
     >
       {label}

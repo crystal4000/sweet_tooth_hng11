@@ -9,7 +9,7 @@ const Footer = () => {
     <>
       <footer className="mt-2 py-3">
         <Container>
-          <div className="row">
+          <div className="row pb-4">
             <div className="footer-logo col-md-3 col-12 d-flex align-items-center mt-md-0 mt-5">
               <p>Sweet Tooth</p>
             </div>
@@ -54,7 +54,7 @@ const Footer = () => {
           </div>
         </Container>
         <hr />
-        <div className=" copy-right col-12 d-flex justify-content-center align-items-center">
+        <div className=" copy-right  col-12 d-flex justify-content-center align-items-center">
           <p className="m-0 p-0">© Sweet Tooth 2024</p>
         </div>
       </footer>

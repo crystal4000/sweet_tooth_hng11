@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 import "../css/Home.css";
 import HeaderImage from "../images/header_image.png";
-import { productsData } from "../utils/functions";
+import { formatNumber, productsData } from "../utils/functions";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { BsCart2 } from "react-icons/bs";
 // import { useEffect, useState } from "react";
@@ -61,21 +61,25 @@ const Home = () => {
     <>
       {/* <Toaster position="top-right" /> */}
       <header className="py-4 px-5">
-        <div className="row">
-          <div className="col-md-6 col-12 ms-md-0 ms-3 d-flex flex-column justify-content-md-center align-items-start">
-            <h2>Treat Yourself To Something Special</h2>
-            <p>Handcrafted with love, Devoured with joy</p>
-            <button type="button" className="btn">
-              Shop Now
-            </button>
-          </div>
+        <div className="header-content">
+          <div className="row">
+            <div className="col-md-6 col-12  d-flex flex-column justify-content-md-center align-items-start">
+              <h2>Treat Yourself To Something Special</h2>
+              <p>Handcrafted with love, Devoured with joy</p>
+              <button type="button" className="btn">
+                Shop Now
+              </button>
+            </div>
 
-          <div className="header-image col-md-6 col-12 d-flex justify-content-center align-items-center">
-            <div className="image-container">
-              <img src={HeaderImage} alt="" className="img-fluid" />
-              <div className="circle"></div>
+            <div className="header-image col-md-6 col-12 d-flex justify-content-center align-items-center">
+              <div className="image-container">
+                <img src={HeaderImage} alt="" className="img-fluid" />
+                <div className="circle"></div>
+              </div>
             </div>
           </div>
+
+          <div className="line"></div>
         </div>
       </header>
 
@@ -129,7 +133,7 @@ const Home = () => {
                     <div className="d-flex justify-content-between align-items-center">
                       <div>
                         <p className="m-0 p-0">{product.grams}</p>
-                        <h6 className="mt-2">${product.price}</h6>
+                        <h6 className="mt-2">${formatNumber(product.price)}</h6>
                       </div>
                       <div className="icon">
                         <BsCart2

@@ -192,7 +192,7 @@ const Cart = () => {
 
           <div className="col-md-4 ps-md-5 mt-md-0 mt-5">
             <div className="mx-md-0 mx-3">
-              <div className="row header-row total">TOTAL</div>
+              <div className="row header-row total">Summary</div>
               <div className="row header-row py-2 amount">
                 <div className="d-flex justify-content-between align-items-center">
                   <p>SUBTOTAL</p>
@@ -204,8 +204,8 @@ const Cart = () => {
                 </div>
               </div>
               <div className="row py-2">
-                <div className="total-price d-flex justify-content-between align-items-center">
-                  <p className="fw-bold">TOTAL PRICE</p>
+                <div className="total-price-container d-flex justify-content-between align-items-center">
+                  <p className="total-price">TOTAL PRICE</p>
                   <p>$7300</p>
                 </div>
                 <p className="mt-md-0 mt-3">Do you have a discount?</p>

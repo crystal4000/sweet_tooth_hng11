@@ -58,16 +58,21 @@
 
 .cart .total {
   margin-top: 7px;
-  font-family: "Libre Baskerville", serif;
   font-size: 22px;
   font-weight: 500;
-  color: rgba(0, 0, 0, 1);
+  color: rgba(51, 51, 51, 1);
 }
 
 .cart .amount p {
   font-size: 16px;
   font-weight: 400;
   color: rgba(0, 0, 0, 1);
+}
+
+.cart .total-price {
+  font-family: "Jost", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .cart .discount input {
@@ -169,7 +174,7 @@
     font-weight: 500;
   }
 
-  .cart .total-price {
+  .cart .total-price-container {
     border-bottom: 2px solid rgba(69, 43, 31, 0.5);
   }
 
