@@ -14,6 +14,7 @@ type Product = {
   price: number;
   image: string;
   quantity: number;
+  favorite?: boolean;
 };
 const Home = () => {
   const [favorites, setFavorites] = useState<Product[]>([]);
@@ -24,6 +25,12 @@ const Home = () => {
     const storedCart = localStorage.getItem("cart");
     if (storedFavorites) {
       setFavorites(JSON.parse(storedFavorites));
+    } else {
+      // If no favorites in localStorage, check productsData for initial favorites
+      const initialFavorites = productsData.filter(
+        (product) => product.favorite
+      );
+      setFavorites(initialFavorites);
     }
     if (storedCart) {
       setCart(JSON.parse(storedCart));
