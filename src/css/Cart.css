@@ -146,13 +146,16 @@
   .cart .quantity,
   .cart .amount p,
   .cart .discount button,
-  .cart .checkoutBtn,
-  .cart .discount input::placeholder {
+  .cart .checkoutBtn {
     font-size: 14px;
   }
 
+  .cart .discount input {
+    font-size: 12px;
+  }
+
   .cart .discount input::placeholder {
-    font-size: 14px;
+    font-size: 11px;
   }
 }
 
@@ -180,5 +183,13 @@
 
   .cart .discount button {
     width: 40%;
+  }
+
+  .cart .discount input {
+    font-size: 14px;
+  }
+
+  .cart .discount input::placeholder {
+    font-size: 12px;
   }
 }
