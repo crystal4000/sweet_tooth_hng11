@@ -4,63 +4,63 @@ import HeaderImage from "../images/header_image.png";
 import { formatNumber, productsData } from "../utils/functions";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { BsCart2 } from "react-icons/bs";
-// import { useEffect, useState } from "react";
-// import toast, { Toaster } from "react-hot-toast";
+import { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
-// type Product = {
-//   id: number;
-//   name: string;
-//   grams: string;
-//   price: number;
-//   image: string;
-//   quantity: number;
-// };
+type Product = {
+  id: number;
+  name: string;
+  grams: string;
+  price: number;
+  image: string;
+  quantity: number;
+};
 const Home = () => {
-  // const [favorites, setFavorites] = useState<Product[]>([]);
-  // const [cart, setCart] = useState<Product[]>([]);
+  const [favorites, setFavorites] = useState<Product[]>([]);
+  const [cart, setCart] = useState<Product[]>([]);
 
-  // useEffect(() => {
-  //   const storedFavorites = localStorage.getItem("favorites");
-  //   const storedCart = localStorage.getItem("cart");
-  //   if (storedFavorites) {
-  //     setFavorites(JSON.parse(storedFavorites));
-  //   }
-  //   if (storedCart) {
-  //     setCart(JSON.parse(storedCart));
-  //   }
-  // }, []);
-  // const handleFavoriteClick = (product: Product) => {
-  //   const isFavorite = favorites.some((fav) => fav.id === product.id);
-  //   let newFavorites;
-  //   if (isFavorite) {
-  //     newFavorites = favorites.filter((fav) => fav.id !== product.id);
-  //   } else {
-  //     newFavorites = [...favorites, product];
-  //   }
-  //   setFavorites(newFavorites);
-  //   localStorage.setItem("favorites", JSON.stringify(newFavorites));
-  // };
+  useEffect(() => {
+    const storedFavorites = localStorage.getItem("favorites");
+    const storedCart = localStorage.getItem("cart");
+    if (storedFavorites) {
+      setFavorites(JSON.parse(storedFavorites));
+    }
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    }
+  }, []);
+  const handleFavoriteClick = (product: Product) => {
+    const isFavorite = favorites.some((fav) => fav.id === product.id);
+    let newFavorites;
+    if (isFavorite) {
+      newFavorites = favorites.filter((fav) => fav.id !== product.id);
+    } else {
+      newFavorites = [...favorites, product];
+    }
+    setFavorites(newFavorites);
+    localStorage.setItem("favorites", JSON.stringify(newFavorites));
+  };
 
-  // const isProductFavorite = (product: Product) => {
-  //   return favorites.some((fav) => fav.id === product.id);
-  // };
+  const isProductFavorite = (product: Product) => {
+    return favorites.some((fav) => fav.id === product.id);
+  };
 
-  // const handleCartClick = (product: Product) => {
-  //   const isInCart = cart.some((item) => item.id === product.id);
-  //   if (isInCart) {
-  //     toast.error("This product is already in your cart.");
-  //   } else {
-  //     const newProduct = { ...product, quantity: 1 }; // Set quantity to 1
-  //     const newCart = [...cart, newProduct];
-  //     setCart(newCart);
-  //     localStorage.setItem("cart", JSON.stringify(newCart));
-  //     toast.success("Product added to cart.");
-  //   }
-  // };
+  const handleCartClick = (product: Product) => {
+    const isInCart = cart.some((item) => item.id === product.id);
+    if (isInCart) {
+      toast.error("This product is already in your cart.");
+    } else {
+      const newProduct = { ...product, quantity: 1 }; // Set quantity to 1
+      const newCart = [...cart, newProduct];
+      setCart(newCart);
+      localStorage.setItem("cart", JSON.stringify(newCart));
+      toast.success("Product added to cart.");
+    }
+  };
   return (
     <>
-      {/* <Toaster position="top-right" /> */}
-      <header className="py-4 px-5">
+      <Toaster position="top-right" />
+      <header className="py-md-4 px-5">
         <div className="header-content">
           <div className="row">
             <div className="col-md-6 col-12  d-flex flex-column justify-content-md-center align-items-start">
@@ -96,7 +96,7 @@ const Home = () => {
               {productsData.map((product) => (
                 <div className="card" key={product.id}>
                   <div className="favorite d-flex justify-content-end">
-                    {product.favorite ? (
+                    {/* {product.favorite ? (
                       <IoMdHeart
                         fontSize={"25px"}
                         color="rgba(247, 220, 111, 1)"
@@ -107,23 +107,23 @@ const Home = () => {
                         fontSize={"25px"}
                         color="rgba(247, 220, 111, 1)"
                         style={{ cursor: "pointer" }}
-                      />
-                    )}
-                    {/* {isProductFavorite(product) ? (
-                      <IoMdHeart
-                        fontSize={"25px"}
-                        color="rgba(247, 220, 111, 1)"
-                        style={{ cursor: "pointer" }}
-                        onClick={() => handleFavoriteClick(product)}
-                      />
-                    ) : (
-                      <IoMdHeartEmpty
-                        fontSize={"25px"}
-                        color="rgba(247, 220, 111, 1)"
-                        style={{ cursor: "pointer" }}
-                        onClick={() => handleFavoriteClick(product)}
                       />
                     )} */}
+                    {isProductFavorite(product) ? (
+                      <IoMdHeart
+                        fontSize={"25px"}
+                        color="rgba(247, 220, 111, 1)"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => handleFavoriteClick(product)}
+                      />
+                    ) : (
+                      <IoMdHeartEmpty
+                        fontSize={"25px"}
+                        color="rgba(247, 220, 111, 1)"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => handleFavoriteClick(product)}
+                      />
+                    )}
                   </div>
                   <div className="image-container">
                     <img src={product.image} alt="" className="img-fluid" />
@@ -140,7 +140,7 @@ const Home = () => {
                           fontSize={"25px"}
                           color="rgba(69, 43, 31, 1)"
                           style={{ cursor: "pointer" }}
-                          // onClick={() => handleCartClick(product)}
+                          onClick={() => handleCartClick(product)}
                         />
                       </div>
                     </div>
