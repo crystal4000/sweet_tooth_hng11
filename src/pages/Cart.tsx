@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { MdAdd } from "react-icons/md";
 import { RiSubtractFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import { productsData } from "../utils/functions";
+// import { productsData } from "../utils/functions";
 
 interface CartItem {
   id: number;
@@ -17,7 +17,7 @@ interface CartItem {
 }
 
 const Cart = () => {
-  const favoriteProducts = productsData.filter((product) => product.favorite);
+  // const favoriteProducts = productsData.filter((product) => product.favorite);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const navigate = useNavigate();
 
