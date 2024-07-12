@@ -6,6 +6,7 @@ import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { BsCart2 } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { useGetProductsQuery } from "../utils/api";
 
 type Product = {
   id: number;
@@ -17,6 +18,13 @@ type Product = {
   favorite?: boolean;
 };
 const Home = () => {
+  const { data } = useGetProductsQuery({
+    page: 1,
+    size: 10,
+    reverseSort: false,
+  });
+
+  console.log(data);
   const [favorites, setFavorites] = useState<Product[]>([]);
   const [cart, setCart] = useState<Product[]>([]);
 
