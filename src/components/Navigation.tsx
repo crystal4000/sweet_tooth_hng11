@@ -21,7 +21,9 @@ const Navigation = () => {
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     const parsedCart: CartItem[] = storedCart ? JSON.parse(storedCart) : [];
-    setCartItems(parsedCart);
+    if (JSON.stringify(parsedCart) !== JSON.stringify(cartItems)) {
+      setCartItems(parsedCart);
+    }
   }, [cartItems]);
 
   const checkCart = () => {

@@ -6,6 +6,7 @@ import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { BsCart2 } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { fetchProducts } from "../utils/api";
 
 type Product = {
   id: number;
@@ -21,18 +22,17 @@ const Home = () => {
   const [cart, setCart] = useState<Product[]>([]);
 
   useEffect(() => {
-    fetch(
-      "/products?organization_id=5d70deeddde7471581db309ffc9c6144&reverse_sort=false&page=1&size=10&Appid=9LADC27VNR5WFA0&Apikey=325feb27c6014e1abe5ac5e4eb8d4abd20240712173607531803"
-    )
-      .then((response) => response.json())
-      .then((data) => {
+    const getProducts = async () => {
+      try {
+        const data = await fetchProducts(1, 10);
         console.log(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
 
+    getProducts();
+  }, []);
   useEffect(() => {
     const storedFavorites = localStorage.getItem("favorites");
     const storedCart = localStorage.getItem("cart");
