@@ -1,5 +1,6 @@
 .cart {
   font-family: "Jost", sans-serif;
+  min-height: 50vh;
 }
 .cart h2 {
   font-family: "Libre Baskerville", serif;
@@ -47,6 +48,12 @@
 .cart .price {
   font-size: 18px;
   font-weight: 400;
+  color: rgba(0, 0, 0, 1);
+}
+
+.cart .emptyCartText {
+  font-size: 16px;
+  font-weight: 500;
   color: rgba(0, 0, 0, 1);
 }
 
@@ -107,7 +114,8 @@
   background: rgba(247, 220, 111, 0.5);
 }
 
-.cart .checkoutBtn {
+.cart .checkoutBtn,
+.cart .emptyCartBtn {
   background: rgba(247, 220, 111, 1);
   border-radius: 5px;
   padding: 5px 10px 5px 10px;

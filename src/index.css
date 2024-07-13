@@ -105,6 +105,24 @@ main {
   font-weight: 400;
 }
 
+.navigation .form-control,
+.navigation .form-control:focus {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: transparent;
+  color: white !important;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.navigation .form-control:focus {
+  box-shadow: none;
+}
+
+.navigation .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
 /*Navigation - End*/
 
 /*Footer - src\components\Footer.tsx*/
@@ -180,10 +198,81 @@ footer .copy-right {
   --bs-pagination-focus-color: rgba(69, 43, 31, 1) !important;
   --bs-pagination-focus-bg: rgba(247, 220, 111, 1) !important;
   --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(247, 220, 111, 1) !important;
-  --bs-pagination-border-color: rgba(69, 43, 31, 1) !important;
   --bs-pagination-border-width: 0 !important;
+  --bs-pagination-padding-x: 1.2rem;
+  --bs-pagination-padding-y: 0.3rem;
 }
 /*Footer - End*/
+
+/*Modal - src\components\ProductModal.tsx*/
+
+.modal-header {
+  border: none !important;
+}
+
+.modal .main_image_container {
+  width: 80%;
+  box-shadow: 0px 1px 2px 2px rgba(69, 43, 31, 0.2);
+  /* border: 1px solid rgba(69, 43, 31, 0.2); */
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.modal .other_images_container {
+  gap: 10px;
+}
+
+.modal .img-container {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.modal .img-container.selected-image {
+  border: 2px solid rgba(69, 43, 31, 0.7);
+}
+
+.modal .img-container img {
+  width: 100%;
+  height: auto;
+}
+
+.modal .product-details,
+.modal .payment-modal {
+  font-family: "Jost", sans-serif;
+}
+
+.modal .product-details h5 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.modal .payment-modal h5 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.modal .product-details p,
+.modal .payment-modal p {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.modal .product-details .price {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.modal .product-details .addBtn {
+  background: rgba(69, 43, 31, 1);
+  color: rgba(247, 220, 111, 1);
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/*Modal - End*/
 
 /*Media Queries*/
 
@@ -265,5 +354,9 @@ footer .copy-right {
   footer .newsletter {
     width: 100%;
     margin-top: 10px !important;
+  }
+
+  .modal .main_image_container {
+    width: 100%;
   }
 }
