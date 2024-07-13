@@ -24,9 +24,25 @@ const PaginationUI: React.FC<PaginationProps> = ({
     );
   }
   return (
-    <div>
-      <Pagination size="sm">{items}</Pagination>
-    </div>
+    <Pagination>
+      <Pagination.Prev
+        onClick={() => {
+          if (currentPage > 1) {
+            onPageChange(currentPage - 1);
+          }
+        }}
+        disabled={currentPage === 1}
+      />
+      {items}
+      <Pagination.Next
+        onClick={() => {
+          if (currentPage < totalPages) {
+            onPageChange(currentPage + 1);
+          }
+        }}
+        disabled={currentPage === totalPages}
+      />
+    </Pagination>
   );
 };
 

@@ -1,20 +1,25 @@
+import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import "../css/Home.css";
 import HeaderImage from "../images/header_image.png";
 import { formatNumber } from "../utils/functions";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
-import { useCallback, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { fetchProducts } from "../utils/api";
 import PaginationUI from "../components/PaginationUI";
 import { IoCart, IoCartOutline } from "react-icons/io5";
 import { useCart } from "../utils/CartContext";
 import { ClipLoader } from "react-spinners";
+import ProductModal from "../components/ProductModal";
+import { useFetchProductsQuery } from "../utils/apiSlice";
 
-const Home = () => {
-  const [loading, setLoading] = useState(true);
+type HomeProps = {
+  searchQuery: string;
+  favoritesFilter: boolean;
+};
+const Home = ({ searchQuery, favoritesFilter }: HomeProps) => {
   const [favorites, setFavorites] = useState<any[]>([]);
-  const [products, setProducts] = useState<any[]>([]);
+  const [showProductModal, setShowProductModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
   const [pageDetails, setPageDetails] = useState<any>({
     currentPage: 1,
     totalItems: 0,
@@ -23,30 +28,21 @@ const Home = () => {
   });
   const { addToCart, cartItems } = useCart();
 
-  const getProducts = useCallback(async () => {
-    setLoading(true);
-    try {
-      const data = await fetchProducts(
-        pageDetails.currentPage,
-        pageDetails.size
-      );
-      setProducts(data.items);
+  // Use the useFetchProductsQuery hook
+  const { data, error, isLoading } = useFetchProductsQuery({
+    page: pageDetails.currentPage,
+    size: pageDetails.size,
+  });
+
+  useEffect(() => {
+    if (data) {
       setPageDetails((prevPageDetails: any) => ({
         ...prevPageDetails,
         totalItems: data.total,
         totalPages: Math.ceil(data.total / pageDetails.size),
       }));
-    } catch (error) {
-      console.error("Error fetching products:", error);
-      toast.error("Failed to fetch products. Please try again later.");
-    } finally {
-      setLoading(false);
     }
-  }, [pageDetails.currentPage, pageDetails.size]);
-
-  useEffect(() => {
-    getProducts();
-  }, [getProducts]);
+  }, [data, pageDetails.size]);
 
   useEffect(() => {
     const storedFavorites = localStorage.getItem("favorites");
@@ -85,12 +81,24 @@ const Home = () => {
     return cartItems.some((item) => item.id === product.id);
   };
 
-  const handlePageChange = async (page: number) => {
+  const handlePageChange = (page: number) => {
     setPageDetails((prevPageDetails: any) => ({
       ...prevPageDetails,
       currentPage: page,
     }));
   };
+
+  // Filter products based on the search query
+  const filteredProducts =
+    data?.items.filter((product: any) => {
+      if (favoritesFilter && !isProductFavorite(product)) return false;
+      if (
+        searchQuery &&
+        !product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+        return false;
+      return true;
+    }) || [];
 
   return (
     <>
@@ -120,13 +128,17 @@ const Home = () => {
 
       <Container>
         <section className="products mt-5 ">
-          {loading ? (
+          {isLoading ? (
             <div className="loader-container d-flex justify-content-center align-items-center">
               <ClipLoader
                 color="rgba(247, 220, 111, 1)"
                 size={80}
                 className="mx-auto"
               />
+            </div>
+          ) : error ? (
+            <div className="error-message d-flex justify-content-center align-items-center">
+              <p>Error fetching products. Please try again later.</p>
             </div>
           ) : (
             <>
@@ -138,68 +150,74 @@ const Home = () => {
               </div>
               <div className="products-container mx-md-3 px-md-5 px-1 pt-3 pb-4 mb-3">
                 <div className="products-list mt-5">
-                  {products &&
-                    products.map((product: any) => (
-                      <div className="card" key={product.id}>
-                        <div className="favorite d-flex justify-content-end">
-                          {isProductFavorite(product) ? (
-                            <IoMdHeart
-                              fontSize={"25px"}
-                              color="rgba(247, 220, 111, 1)"
-                              style={{ cursor: "pointer" }}
-                              onClick={() => handleFavoriteClick(product)}
-                            />
-                          ) : (
-                            <IoMdHeartEmpty
-                              fontSize={"25px"}
-                              color="rgba(247, 220, 111, 1)"
-                              style={{ cursor: "pointer" }}
-                              onClick={() => handleFavoriteClick(product)}
-                            />
-                          )}
-                        </div>
-                        <div className="image-container">
-                          <img
-                            src={`https://api.timbu.cloud/images/${product.photos[0].url}`}
-                            alt={product.name}
-                            className="img-fluid"
+                  {filteredProducts.map((product: any) => (
+                    <div className="card" key={product.id}>
+                      <div className="favorite d-flex justify-content-end">
+                        {isProductFavorite(product) ? (
+                          <IoMdHeart
+                            fontSize={"25px"}
+                            color="rgba(247, 220, 111, 1)"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => handleFavoriteClick(product)}
                           />
-                        </div>
-                        <div className="product-details mt-3">
-                          <h5>{product.name}</h5>
-                          <div className="d-flex justify-content-between align-items-center">
-                            <div>
-                              <p className="m-0 p-0">{product.grams}</p>
-                              <h6 className="mt-2">
-                                ${formatNumber(product.current_price[0].USD[0])}
-                              </h6>
-                            </div>
-                            <div className="icon">
-                              {isProductInCart(product) ? (
-                                <IoCart
-                                  fontSize={"25px"}
-                                  color="rgba(69, 43, 31, 1)"
-                                  style={{ cursor: "pointer" }}
-                                  onClick={() => handleCartClick(product)}
-                                />
-                              ) : (
-                                <IoCartOutline
-                                  fontSize={"25px"}
-                                  color="rgba(69, 43, 31, 1)"
-                                  style={{ cursor: "pointer" }}
-                                  onClick={() => handleCartClick(product)}
-                                />
-                              )}
-                            </div>
+                        ) : (
+                          <IoMdHeartEmpty
+                            fontSize={"25px"}
+                            color="rgba(247, 220, 111, 1)"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => handleFavoriteClick(product)}
+                          />
+                        )}
+                      </div>
+                      <div
+                        className="image-container"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => {
+                          setShowProductModal(true);
+                          setSelectedProduct(product);
+                        }}
+                      >
+                        <img
+                          src={`https://api.timbu.cloud/images/${product.photos[0].url}`}
+                          alt={product.name}
+                          className="img-fluid"
+                        />
+                      </div>
+                      <div className="product-details mt-3">
+                        <h5>{product.name}</h5>
+                        <div className="d-flex justify-content-between align-items-center">
+                          <div>
+                            <p className="m-0 p-0">{product.grams}</p>
+                            <h6 className="mt-2">
+                              ${formatNumber(product.current_price[0].USD[0])}
+                            </h6>
+                          </div>
+                          <div className="icon">
+                            {isProductInCart(product) ? (
+                              <IoCart
+                                fontSize={"25px"}
+                                color="rgba(69, 43, 31, 1)"
+                                style={{ cursor: "pointer" }}
+                                onClick={() => handleCartClick(product)}
+                              />
+                            ) : (
+                              <IoCartOutline
+                                fontSize={"25px"}
+                                color="rgba(69, 43, 31, 1)"
+                                style={{ cursor: "pointer" }}
+                                onClick={() => handleCartClick(product)}
+                              />
+                            )}
                           </div>
                         </div>
                       </div>
-                    ))}
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              {(products.length > 0 || pageDetails.totalPages > 1) && (
-                <div className="d-flex justify-content-center mx-4">
+              {(data?.items.length > 0 || pageDetails.totalPages > 1) && (
+                <div className="d-flex justify-content-end mx-4">
                   <PaginationUI
                     totalPages={pageDetails.totalPages}
                     currentPage={pageDetails.currentPage}
@@ -210,6 +228,12 @@ const Home = () => {
             </>
           )}
         </section>
+
+        <ProductModal
+          show={showProductModal}
+          handleClose={() => setShowProductModal(false)}
+          product={selectedProduct}
+        />
       </Container>
     </>
   );
