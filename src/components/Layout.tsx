@@ -5,11 +5,24 @@ import { Outlet } from "react-router-dom";
 
 type LayoutProps = {
   children?: ReactNode;
+  setSearchQuery: (query: string) => void;
+  favoritesFilter: boolean;
+  setFavoritesFilter: (filter: boolean) => void;
 };
-const Layout = ({ children }: LayoutProps) => {
+
+const Layout = ({
+  children,
+  setSearchQuery,
+  favoritesFilter,
+  setFavoritesFilter,
+}: LayoutProps) => {
   return (
     <>
-      <Navigation />
+      <Navigation
+        setSearchQuery={setSearchQuery}
+        setFavoritesFilter={setFavoritesFilter}
+        favoritesFilter={favoritesFilter}
+      />
       <main>
         {children}
         <Outlet />

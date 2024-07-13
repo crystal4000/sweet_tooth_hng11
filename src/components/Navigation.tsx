@@ -1,14 +1,35 @@
 import { useState } from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Container, Form, Nav, Navbar } from "react-bootstrap";
 import { CiHeart, CiSearch } from "react-icons/ci";
 import { PiShoppingCartThin } from "react-icons/pi";
 import { IoMenu } from "react-icons/io5";
 import { CustomNavLink } from "./CustomNavLink";
 import { useCart } from "../utils/CartContext";
+import { IoMdHeart } from "react-icons/io";
 
-const Navigation = () => {
+type NavigationProps = {
+  setSearchQuery: (query: string) => void;
+  setFavoritesFilter: (filter: boolean) => void;
+  favoritesFilter: boolean;
+};
+const Navigation = ({
+  setSearchQuery,
+  setFavoritesFilter,
+  favoritesFilter,
+}: NavigationProps) => {
   const [toggle, setToggle] = useState(false);
+  const [showSearchInput, setShowSearchInput] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
   const { cartCount } = useCart();
+
+  const handleSearchClick = () => {
+    setShowSearchInput(!showSearchInput);
+  };
+
+  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(e.target.value);
+    setSearchQuery(e.target.value);
+  };
 
   return (
     <>
@@ -52,14 +73,38 @@ const Navigation = () => {
           </Navbar.Collapse> */}
           {/* <Nav className={`d-flex flex-row ${toggle ? "mx-auto" : ""}`}> */}
           <Nav className={`d-flex flex-row `}>
+            {showSearchInput && (
+              <Form.Control
+                type="text"
+                placeholder="Search"
+                className="search-input me-2"
+                value={searchInput}
+                onChange={handleSearchInputChange}
+              />
+            )}
             <CustomNavLink
               to="#search"
-              label={<CiSearch className="nav-icon" />}
+              label={
+                <CiSearch className="nav-icon" onClick={handleSearchClick} />
+              }
               toggle={toggle}
             />
             <CustomNavLink
-              to="/"
-              label={<CiHeart className="nav-icon" />}
+              to="#favorites"
+              label={
+                favoritesFilter ? (
+                  <IoMdHeart
+                    className="nav-icon"
+                    color="rgba(247, 220, 111, 1)"
+                    onClick={() => setFavoritesFilter(!favoritesFilter)}
+                  />
+                ) : (
+                  <CiHeart
+                    className="nav-icon"
+                    onClick={() => setFavoritesFilter(!favoritesFilter)}
+                  />
+                )
+              }
               toggle={toggle}
             />
             <div className="position-relative">
