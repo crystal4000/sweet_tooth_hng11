@@ -1,36 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { CiHeart, CiSearch } from "react-icons/ci";
 import { PiShoppingCartThin } from "react-icons/pi";
 import { IoMenu } from "react-icons/io5";
 import { CustomNavLink } from "./CustomNavLink";
-import toast from "react-hot-toast";
+import { useCart } from "../utils/CartContext";
 
-interface CartItem {
-  id: number;
-  name: string;
-  image: string;
-  grams: string;
-  quantity: number;
-  price: number;
-  favorite: boolean;
-}
 const Navigation = () => {
   const [toggle, setToggle] = useState(false);
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  useEffect(() => {
-    const storedCart = localStorage.getItem("cart");
-    const parsedCart: CartItem[] = storedCart ? JSON.parse(storedCart) : [];
-    if (JSON.stringify(parsedCart) !== JSON.stringify(cartItems)) {
-      setCartItems(parsedCart);
-    }
-  }, [cartItems]);
-
-  const checkCart = () => {
-    if (cartItems.length === 0) {
-      toast.error("Your cart is empty");
-    }
-  };
+  const { cartCount } = useCart();
 
   return (
     <>
@@ -86,14 +64,11 @@ const Navigation = () => {
             />
             <div className="position-relative">
               <CustomNavLink
-                to={`${cartItems.length > 0 ? "/cart" : "/"}`}
+                to={`/cart`}
                 label={<PiShoppingCartThin className="nav-icon" />}
                 toggle={toggle}
-                onClick={checkCart}
               />
-              {/* <span className="cart-count position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger">
-                0
-              </span> */}
+              <span className="cart-count position-absolute">{cartCount}</span>
             </div>
           </Nav>
         </Container>

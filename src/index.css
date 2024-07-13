@@ -89,6 +89,22 @@ main {
   color: rgba(255, 255, 255, 0.5);
 }
 
+.cart-count {
+  top: 0px;
+  right: 0px;
+  background: rgba(247, 220, 111, 1);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Jost", sans-serif;
+  font-weight: 400;
+}
+
 /*Navigation - End*/
 
 /*Footer - src\components\Footer.tsx*/
@@ -153,6 +169,20 @@ footer .copy-right {
   line-height: 32.68px;
 }
 
+.pagination {
+  --bs-pagination-color: rgba(69, 43, 31, 1) !important;
+  --bs-pagination-active-color: #fff !important;
+  --bs-pagination-active-bg: rgba(247, 220, 111, 1) !important;
+  --bs-pagination-active-border-color: rgba(69, 43, 31, 1) !important;
+  --bs-pagination-hover-color: #fff !important;
+  --bs-pagination-hover-bg: rgba(247, 220, 111, 1) !important;
+  --bs-pagination-hover-border-color: rgba(69, 43, 31, 1) !important;
+  --bs-pagination-focus-color: rgba(69, 43, 31, 1) !important;
+  --bs-pagination-focus-bg: rgba(247, 220, 111, 1) !important;
+  --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(247, 220, 111, 1) !important;
+  --bs-pagination-border-color: rgba(69, 43, 31, 1) !important;
+  --bs-pagination-border-width: 0 !important;
+}
 /*Footer - End*/
 
 /*Media Queries*/

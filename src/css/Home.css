@@ -81,6 +81,10 @@ header .line {
   display: none;
 }
 
+.loader-container {
+  height: 500px;
+}
+
 .products {
   position: relative;
 }
