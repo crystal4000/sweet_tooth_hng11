@@ -125,6 +125,16 @@
   color: rgba(0, 0, 0, 1);
 }
 
+.cart .clear-cart-btn {
+  background: rgba(211, 32, 17, 1);
+  border-radius: 5px;
+  padding: 5px 10px 5px 10px;
+  font-family: "Jost", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 1);
+}
+
 @media screen and (max-width: 768px) {
   .cart .header {
     font-size: 14px;

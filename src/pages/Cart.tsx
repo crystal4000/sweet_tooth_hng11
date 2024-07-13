@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "../utils/CartContext";
 
 const Cart = () => {
-  const { cartItems, removeFromCart, updateQuantity } = useCart();
+  const { cartItems, setCartItems, removeFromCart, updateQuantity } = useCart();
   const navigate = useNavigate();
 
   const handleIncrement = (productId: number) => {
@@ -23,6 +23,12 @@ const Cart = () => {
     if (updatedQuantity && updatedQuantity > 0) {
       updateQuantity(productId, updatedQuantity);
     }
+  };
+
+  const handleClearCart = () => {
+    // Clear cart items from context and local storage
+    localStorage.removeItem("cart");
+    setCartItems([]);
   };
 
   const delivery = 1000;
@@ -175,6 +181,12 @@ const Cart = () => {
                     <div className="d-flex justify-content-end"></div>
                   </div>
                 </div>
+              </div>
+
+              <div className="col-md-3 mt-3 px-0 d-md-block d-none">
+                <button className="clear-cart-btn" onClick={handleClearCart}>
+                  Clear Cart
+                </button>
               </div>
             </div>
           </>

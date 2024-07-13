@@ -8,6 +8,7 @@ import {
 
 interface CartContextType {
   cartItems: any[];
+  setCartItems: (cartItems: any[]) => void;
   addToCart: (product: any) => void;
   removeFromCart: (productId: number) => void;
   updateQuantity: (productId: number, newQuantity: number) => void;
@@ -68,6 +69,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     <CartContext.Provider
       value={{
         cartItems,
+        setCartItems,
         addToCart,
         updateQuantity,
         removeFromCart,
