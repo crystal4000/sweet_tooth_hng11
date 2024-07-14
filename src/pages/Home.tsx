@@ -11,7 +11,7 @@ import { useCart } from "../utils/CartContext";
 import { ClipLoader } from "react-spinners";
 import ProductModal from "../components/ProductModal";
 import { useFetchProductsQuery } from "../utils/apiSlice";
-import { Product, PageDetails, HomeProps } from "../types/type";
+import { Product, PageDetails, HomeProps } from "../types/types";
 
 const Home = ({ searchQuery, favoritesFilter }: HomeProps) => {
   const [showProductModal, setShowProductModal] = useState(false);

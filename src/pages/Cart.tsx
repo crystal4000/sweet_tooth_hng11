@@ -4,7 +4,7 @@ import { MdAdd } from "react-icons/md";
 import { RiSubtractFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../utils/CartContext";
-import { Product } from "../types/type";
+import { Product } from "../types/types";
 
 const Cart = () => {
   const { cartItems, setCartItems, removeFromCart, updateQuantity } = useCart();

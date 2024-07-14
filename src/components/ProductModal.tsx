@@ -4,7 +4,7 @@ import { IoClose } from "react-icons/io5";
 import toast from "react-hot-toast";
 import { useCart } from "../utils/CartContext";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
-import { Photos, Product } from "../types/type";
+import { Photos, Product } from "../types/types";
 
 const ProductModal = ({
   show,

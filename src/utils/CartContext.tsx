@@ -5,7 +5,7 @@ import {
   ReactNode,
   useEffect,
 } from "react";
-import { Product } from "../types/type";
+import { Product } from "../types/types";
 
 interface CartContextType {
   cartItems: Product[];
