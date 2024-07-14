@@ -1,14 +1,8 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
-
-type LayoutProps = {
-  children?: ReactNode;
-  setSearchQuery: (query: string) => void;
-  favoritesFilter: boolean;
-  setFavoritesFilter: (filter: boolean) => void;
-};
+import { LayoutProps } from "../types/type";
 
 const Layout = ({
   children,

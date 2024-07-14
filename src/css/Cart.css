@@ -100,7 +100,7 @@
   text-transform: uppercase;
 }
 
-.cart .discount button {
+.cart .discount .applyBtn {
   background: rgba(247, 220, 111, 1);
   border-radius: 5px;
   padding: 5px 10px 5px 10px;
@@ -110,19 +110,30 @@
   color: rgba(0, 0, 0, 1);
 }
 
-.cart .discount button:hover {
+.cart .discount .applyBtn:hover {
   background: rgba(247, 220, 111, 0.5);
 }
 
 .cart .checkoutBtn,
 .cart .emptyCartBtn {
-  background: rgba(247, 220, 111, 1);
+  background: #fff;
   border-radius: 5px;
   padding: 5px 10px 5px 10px;
   font-family: "Jost", sans-serif;
   font-size: 18px;
   font-weight: 600;
   color: rgba(0, 0, 0, 1);
+  border: 3px solid rgba(247, 220, 111, 1);
+}
+
+.cart .checkoutBtn:hover {
+  background: rgba(247, 220, 111, 1);
+  border: 0;
+}
+
+.cart .emptyCartBtn {
+  background: rgba(247, 220, 111, 1);
+  border: 0;
 }
 
 .cart .clear-cart-btn {
@@ -163,7 +174,7 @@
   .cart .product h5,
   .cart .quantity,
   .cart .amount p,
-  .cart .discount button,
+  .cart .discount .applyBtn,
   .cart .checkoutBtn {
     font-size: 14px;
   }
@@ -199,7 +210,7 @@
     border-bottom: 2px solid rgba(69, 43, 31, 0.5);
   }
 
-  .cart .discount button {
+  .cart .discount .applyBtn {
     width: 40%;
   }
 

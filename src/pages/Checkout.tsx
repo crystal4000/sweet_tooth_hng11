@@ -6,12 +6,26 @@ import { getNext20Years, months } from "../utils/functions";
 import { countries as countriesList } from "countries-list";
 import ConfirmModal from "../components/ConfirmModal";
 
+interface FormValues {
+  firstName: string;
+  lastName: string;
+  billingAddress: string;
+  city: string;
+  zip: string;
+  country: string;
+  nameOnCard: string;
+  cardNumber: string;
+  securityCode: string;
+  expiryMonth: string;
+  expiryYear: string;
+}
+
 const Checkout = () => {
   const countries = Object.values(countriesList);
   const years = getNext20Years();
   const [validated, setValidated] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const [formValues, setFormValues] = useState({
+  const [formValues, setFormValues] = useState<FormValues>({
     firstName: "",
     lastName: "",
     billingAddress: "",
@@ -24,8 +38,11 @@ const Checkout = () => {
     expiryMonth: "",
     expiryYear: "",
   });
+  const [errors, setErrors] = useState<Partial<FormValues>>({});
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
+
+    setErrors({ ...errors, [name]: "" });
 
     if (name === "cardNumber") {
       const cleanedValue = value.replace(/\D/g, "");
@@ -45,13 +62,20 @@ const Checkout = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
-
-    const form = event.currentTarget;
     const { cardNumber, securityCode, country, expiryMonth, expiryYear } =
       formValues;
 
-    if (form.checkValidity() === false) {
+    const newErrors: Partial<FormValues> = {};
+    Object.keys(formValues).forEach((key) => {
+      if (!formValues[key as keyof FormValues]) {
+        newErrors[key as keyof FormValues] = "Required";
+      }
+    });
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors({ ...errors, ...newErrors });
       toast.error("Please fill all the required fields.");
+      setValidated(true);
       return;
     }
 
@@ -71,7 +95,7 @@ const Checkout = () => {
     }
 
     setShowConfirmModal(true);
-    localStorage.removeItem("cart"); // Remove cart from local storage
+    localStorage.removeItem("cart");
     setValidated(true);
   };
 
@@ -96,8 +120,11 @@ const Checkout = () => {
                   <Form.Label>First Name</Form.Label>
                   <Form.Control
                     type="text"
-                    className="form-control"
+                    className={`form-control ${
+                      !!errors.firstName && "is-invalid"
+                    }`}
                     name="firstName"
+                    isInvalid={!!errors.firstName}
                     value={formValues.firstName}
                     onChange={handleChange}
                     required
@@ -109,6 +136,7 @@ const Checkout = () => {
                     type="text"
                     className="form-control"
                     name="lastName"
+                    isInvalid={!!errors.lastName}
                     value={formValues.lastName}
                     onChange={handleChange}
                     required
@@ -120,6 +148,7 @@ const Checkout = () => {
                     type="text"
                     className="form-control"
                     name="billingAddress"
+                    isInvalid={!!errors.billingAddress}
                     value={formValues.billingAddress}
                     onChange={handleChange}
                     required
@@ -131,6 +160,7 @@ const Checkout = () => {
                     type="text"
                     className="form-control"
                     name="city"
+                    isInvalid={!!errors.city}
                     value={formValues.city}
                     onChange={handleChange}
                     required
@@ -145,6 +175,7 @@ const Checkout = () => {
                         type="text"
                         className="form-control"
                         name="zip"
+                        isInvalid={!!errors.zip}
                         value={formValues.zip}
                         onChange={handleChange}
                         required
@@ -157,6 +188,7 @@ const Checkout = () => {
                       <Form.Select
                         aria-label="Country"
                         name="country"
+                        isInvalid={!!errors.country}
                         value={formValues.country}
                         onChange={(e) => {
                           setFormValues({
@@ -188,6 +220,7 @@ const Checkout = () => {
                     type="text"
                     className="form-control"
                     name="nameOnCard"
+                    isInvalid={!!errors.nameOnCard}
                     value={formValues.nameOnCard}
                     onChange={handleChange}
                     required
@@ -199,6 +232,7 @@ const Checkout = () => {
                     type="text"
                     className="form-control"
                     name="cardNumber"
+                    isInvalid={!!errors.cardNumber}
                     value={formValues.cardNumber}
                     onChange={handleChange}
                     required
@@ -212,6 +246,7 @@ const Checkout = () => {
                         type="text"
                         className="form-control"
                         name="securityCode"
+                        isInvalid={!!errors.securityCode}
                         value={formValues.securityCode}
                         onChange={handleChange}
                         required
@@ -225,7 +260,7 @@ const Checkout = () => {
                         aria-label="Default select example"
                         name="expiryMonth"
                         value={formValues.expiryMonth}
-                        isInvalid
+                        isInvalid={!!errors.expiryMonth}
                         onChange={(e) => {
                           setFormValues({
                             ...formValues,
@@ -251,6 +286,7 @@ const Checkout = () => {
                         name="expiryYear"
                         value={formValues.expiryYear}
                         className="year"
+                        isInvalid={!!errors.expiryYear}
                         onChange={(e) => {
                           setFormValues({
                             ...formValues,

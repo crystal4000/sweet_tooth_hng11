@@ -4,6 +4,7 @@ import { IoClose } from "react-icons/io5";
 import toast from "react-hot-toast";
 import { useCart } from "../utils/CartContext";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
+import { Photos, Product } from "../types/type";
 
 const ProductModal = ({
   show,
@@ -11,19 +12,19 @@ const ProductModal = ({
   product,
 }: {
   show: boolean;
-  handleClose: any;
-  product: any;
+  handleClose: () => void;
+  product: Product | null;
 }) => {
-  const { addToCart, cartItems, removeFromCart } = useCart();
+  const {
+    addToCart,
+    cartItems,
+    removeFromCart,
+    addToFavorites,
+    removeFromFavorites,
+    isFavorite,
+  } = useCart();
   const [currentImage, setCurrentImage] = useState("");
-  const [favorites, setFavorites] = useState<any[]>([]);
 
-  useEffect(() => {
-    const storedFavorites = localStorage.getItem("favorites");
-    if (storedFavorites) {
-      setFavorites(JSON.parse(storedFavorites));
-    }
-  }, []);
   useEffect(() => {
     if (product && product.photos && product.photos.length > 0) {
       setCurrentImage(product.photos[0].url);
@@ -34,19 +35,15 @@ const ProductModal = ({
     return null; // or return a placeholder or loading state
   }
 
-  const handleFavoriteClick = (product: any) => {
-    const isFavorite = favorites.some((fav) => fav.id === product.id);
-    let newFavorites;
-    if (isFavorite) {
-      newFavorites = favorites.filter((fav) => fav.id !== product.id);
+  const handleFavoriteClick = (product: Product) => {
+    if (isFavorite(product.id)) {
+      removeFromFavorites(product.id);
     } else {
-      newFavorites = [...favorites, product];
+      addToFavorites(product);
     }
-    setFavorites(newFavorites);
-    localStorage.setItem("favorites", JSON.stringify(newFavorites));
   };
 
-  const handleCartClick = (product: any) => {
+  const handleCartClick = (product: Product) => {
     const isInCart = cartItems.some((item) => item.id === product.id);
     if (isInCart) {
       removeFromCart(product.id);
@@ -55,10 +52,6 @@ const ProductModal = ({
       addToCart(product);
       toast.success("Item added to cart!");
     }
-  };
-
-  const isProductFavorite = (product: any) => {
-    return favorites.some((fav) => fav.id === product.id);
   };
 
   const isInCart = cartItems.some((item) => item.id === product.id);
@@ -94,7 +87,7 @@ const ProductModal = ({
             </div>
 
             <div className="mt-3 other_images_container d-flex justify-content-center  align-items-center">
-              {product.photos.map((photo: any, index: number) => (
+              {product.photos.map((photo: Photos, index: number) => (
                 <div
                   className={`img-container p-2 d-flex justify-content-center align-items-center ${
                     currentImage === photo.url ? "selected-image" : ""
@@ -116,7 +109,7 @@ const ProductModal = ({
           <div className="product-details mt-4 mx-md-3">
             <div className="d-flex justify-content-between align-items-center">
               <h5>{product.name}</h5>
-              {isProductFavorite(product) ? (
+              {isFavorite(product.id) ? (
                 <IoMdHeart
                   fontSize={"25px"}
                   color="rgba(247, 220, 111, 1)"

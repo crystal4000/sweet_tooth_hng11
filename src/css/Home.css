@@ -85,6 +85,13 @@ header .line {
   height: 500px;
 }
 
+.emptyCartText {
+  font-family: "Jost", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 1);
+}
+
 .products {
   position: relative;
 }

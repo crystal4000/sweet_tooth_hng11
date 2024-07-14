@@ -6,12 +6,8 @@ import { IoMenu } from "react-icons/io5";
 import { CustomNavLink } from "./CustomNavLink";
 import { useCart } from "../utils/CartContext";
 import { IoMdHeart } from "react-icons/io";
+import { NavigationProps } from "../types/type";
 
-type NavigationProps = {
-  setSearchQuery: (query: string) => void;
-  setFavoritesFilter: (filter: boolean) => void;
-  favoritesFilter: boolean;
-};
 const Navigation = ({
   setSearchQuery,
   setFavoritesFilter,

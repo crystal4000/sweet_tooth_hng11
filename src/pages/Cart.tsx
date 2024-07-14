@@ -4,23 +4,25 @@ import { MdAdd } from "react-icons/md";
 import { RiSubtractFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../utils/CartContext";
+import { Product } from "../types/type";
 
 const Cart = () => {
   const { cartItems, setCartItems, removeFromCart, updateQuantity } = useCart();
   const navigate = useNavigate();
 
-  const handleIncrement = (productId: number) => {
+  const handleIncrement = (productId: string) => {
     const updatedQuantity =
-      cartItems.find((item) => item.id === productId)?.quantity + 1;
+      (cartItems.find((item) => item.id === productId)?.quantity ?? 0) + 1;
     if (updatedQuantity) {
       updateQuantity(productId, updatedQuantity);
     }
   };
 
-  const handleDecrement = (productId: number) => {
-    const updatedQuantity =
-      cartItems.find((item) => item.id === productId)?.quantity - 1;
-    if (updatedQuantity && updatedQuantity > 0) {
+  const handleDecrement = (productId: string) => {
+    const currentQuantity =
+      cartItems.find((item) => item.id === productId)?.quantity ?? 0;
+    const updatedQuantity = currentQuantity - 1;
+    if (updatedQuantity > 0) {
       updateQuantity(productId, updatedQuantity);
     }
   };
@@ -33,7 +35,12 @@ const Cart = () => {
 
   const delivery = 1000;
   const subtotal = cartItems.reduce((acc, item) => {
-    return acc + item.current_price[0].USD[0] * item.quantity;
+    const price =
+      Array.isArray(item.current_price[0].USD) &&
+      item.current_price[0].USD.length > 0
+        ? item.current_price[0].USD[0]
+        : 0;
+    return acc + (typeof price === "number" ? price : 0) * item.quantity;
   }, 0);
 
   const totalPrice = subtotal + delivery;
@@ -73,7 +80,7 @@ const Cart = () => {
                   </div>
                 </div>
 
-                {cartItems.map((item: any) => (
+                {cartItems.map((item: Product) => (
                   <div className="row header-row py-2" key={item.id}>
                     <div className="header col-md-6 col-12 d-flex flex-md-row flex-column justify-content-md-start justify-content-center align-items-md-start align-items-center">
                       <div className="image-container m-2">
@@ -88,9 +95,9 @@ const Cart = () => {
              mt-0"
                       >
                         <h5>{item.name}</h5>
-                        <p className="text-md-start text-center">
+                        {/* <p className="text-md-start text-center">
                           {item.grams}
-                        </p>
+                        </p> */}
                       </div>
                     </div>
                     <div className="header col-md-2 col-4 text-center d-flex justify-content-center align-items-center">
@@ -111,8 +118,13 @@ const Cart = () => {
                       />
                     </div>
                     <div className="price col-md-2 col-4 d-flex justify-content-center align-items-center text-center">
-                      ${item.current_price[0].USD[0] * item.quantity}
+                      {item.current_price &&
+                      item.current_price[0]?.USD &&
+                      typeof item.current_price[0].USD[0] === "number"
+                        ? `$${item.current_price[0].USD[0] * item.quantity}`
+                        : "Price Not Available"}
                     </div>
+
                     <div className="header col-md-2 col-4 d-flex justify-content-center align-items-center">
                       <svg
                         width="24"
@@ -156,28 +168,32 @@ const Cart = () => {
                       <p>${totalPrice}</p>
                     </div>
                     <p className="mt-md-0 mt-3">Do you have a discount?</p>
-                    <div className="discount w-100 d-flex">
-                      <input
-                        type="text"
-                        placeholder="Discount code"
-                        className="w-100"
-                      />
-                      <button className="ms-1">APPLY</button>
+                    <div className="discount w-100">
+                      <div className="d-flex">
+                        <input
+                          type="text"
+                          placeholder="Discount code"
+                          className="w-100"
+                        />
+                        <button className="ms-1 applyBtn">APPLY</button>
+                      </div>
+
+                      <button
+                        className="checkoutBtn mt-4 w-100"
+                        onClick={() => navigate("/checkout")}
+                      >
+                        CHECKOUT
+                      </button>
+
+                      <p
+                        className="continue mt-2 text-end text-decoration-underline"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => navigate("/")}
+                      >
+                        CONTINUE SHOPPING
+                      </p>
                     </div>
 
-                    <button
-                      className="checkoutBtn mt-4"
-                      onClick={() => navigate("/checkout")}
-                    >
-                      CHECKOUT
-                    </button>
-                    <p
-                      className="continue mt-2 text-end text-decoration-underline"
-                      style={{ cursor: "pointer" }}
-                      onClick={() => navigate("/")}
-                    >
-                      CONTINUE SHOPPING
-                    </p>
                     <div className="d-flex justify-content-end"></div>
                   </div>
                 </div>

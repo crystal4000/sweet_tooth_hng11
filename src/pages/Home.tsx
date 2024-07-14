@@ -11,22 +11,24 @@ import { useCart } from "../utils/CartContext";
 import { ClipLoader } from "react-spinners";
 import ProductModal from "../components/ProductModal";
 import { useFetchProductsQuery } from "../utils/apiSlice";
+import { Product, PageDetails, HomeProps } from "../types/type";
 
-type HomeProps = {
-  searchQuery: string;
-  favoritesFilter: boolean;
-};
 const Home = ({ searchQuery, favoritesFilter }: HomeProps) => {
-  const [favorites, setFavorites] = useState<any[]>([]);
   const [showProductModal, setShowProductModal] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<any>(null);
-  const [pageDetails, setPageDetails] = useState<any>({
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [pageDetails, setPageDetails] = useState<PageDetails>({
     currentPage: 1,
     totalItems: 0,
     size: 12,
     totalPages: 0,
   });
-  const { addToCart, cartItems } = useCart();
+  const {
+    addToCart,
+    cartItems,
+    addToFavorites,
+    removeFromFavorites,
+    isFavorite,
+  } = useCart();
 
   // Use the useFetchProductsQuery hook
   const { data, error, isLoading } = useFetchProductsQuery({
@@ -36,7 +38,7 @@ const Home = ({ searchQuery, favoritesFilter }: HomeProps) => {
 
   useEffect(() => {
     if (data) {
-      setPageDetails((prevPageDetails: any) => ({
+      setPageDetails((prevPageDetails) => ({
         ...prevPageDetails,
         totalItems: data.total,
         totalPages: Math.ceil(data.total / pageDetails.size),
@@ -44,26 +46,15 @@ const Home = ({ searchQuery, favoritesFilter }: HomeProps) => {
     }
   }, [data, pageDetails.size]);
 
-  useEffect(() => {
-    const storedFavorites = localStorage.getItem("favorites");
-    if (storedFavorites) {
-      setFavorites(JSON.parse(storedFavorites));
-    }
-  }, []);
-
-  const handleFavoriteClick = (product: any) => {
-    const isFavorite = favorites.some((fav) => fav.id === product.id);
-    let newFavorites;
-    if (isFavorite) {
-      newFavorites = favorites.filter((fav) => fav.id !== product.id);
+  const handleFavoriteClick = (product: Product) => {
+    if (isFavorite(product.id)) {
+      removeFromFavorites(product.id);
     } else {
-      newFavorites = [...favorites, product];
+      addToFavorites(product);
     }
-    setFavorites(newFavorites);
-    localStorage.setItem("favorites", JSON.stringify(newFavorites));
   };
 
-  const handleCartClick = (product: any) => {
+  const handleCartClick = (product: Product) => {
     const isInCart = cartItems.some((item) => item.id === product.id);
     if (isInCart) {
       toast.error("This item is already in your cart!");
@@ -73,16 +64,12 @@ const Home = ({ searchQuery, favoritesFilter }: HomeProps) => {
     }
   };
 
-  const isProductFavorite = (product: any) => {
-    return favorites.some((fav) => fav.id === product.id);
-  };
-
-  const isProductInCart = (product: any) => {
+  const isProductInCart = (product: Product) => {
     return cartItems.some((item) => item.id === product.id);
   };
 
   const handlePageChange = (page: number) => {
-    setPageDetails((prevPageDetails: any) => ({
+    setPageDetails((prevPageDetails) => ({
       ...prevPageDetails,
       currentPage: page,
     }));
@@ -90,8 +77,8 @@ const Home = ({ searchQuery, favoritesFilter }: HomeProps) => {
 
   // Filter products based on the search query
   const filteredProducts =
-    data?.items.filter((product: any) => {
-      if (favoritesFilter && !isProductFavorite(product)) return false;
+    data?.items.filter((product: Product) => {
+      if (favoritesFilter && !isFavorite(product.id)) return false;
       if (
         searchQuery &&
         !product.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -137,8 +124,10 @@ const Home = ({ searchQuery, favoritesFilter }: HomeProps) => {
               />
             </div>
           ) : error ? (
-            <div className="error-message d-flex justify-content-center align-items-center">
-              <p>Error fetching products. Please try again later.</p>
+            <div className="error-message d-flex justify-content-center align-items-center py-5">
+              <p className="emptyCartText">
+                Error fetching products. Please try again later.
+              </p>
             </div>
           ) : (
             <>
@@ -150,10 +139,10 @@ const Home = ({ searchQuery, favoritesFilter }: HomeProps) => {
               </div>
               <div className="products-container mx-md-3 px-md-5 px-1 pt-3 pb-4 mb-3">
                 <div className="products-list mt-5">
-                  {filteredProducts.map((product: any) => (
+                  {filteredProducts.map((product: Product) => (
                     <div className="card" key={product.id}>
                       <div className="favorite d-flex justify-content-end">
-                        {isProductFavorite(product) ? (
+                        {isFavorite(product.id) ? (
                           <IoMdHeart
                             fontSize={"25px"}
                             color="rgba(247, 220, 111, 1)"
@@ -187,9 +176,12 @@ const Home = ({ searchQuery, favoritesFilter }: HomeProps) => {
                         <h5>{product.name}</h5>
                         <div className="d-flex justify-content-between align-items-center">
                           <div>
-                            <p className="m-0 p-0">{product.grams}</p>
+                            {/* <p className="m-0 p-0">{product.grams}</p> */}
                             <h6 className="mt-2">
-                              ${formatNumber(product.current_price[0].USD[0])}
+                              $
+                              {formatNumber(
+                                product.current_price[0]?.USD?.[0] ?? 0
+                              )}
                             </h6>
                           </div>
                           <div className="icon">
